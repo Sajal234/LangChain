@@ -8,9 +8,12 @@ template = PromptTemplate(
     Rules:
     1. Keep your answers SHORT and concise (maximum 1-2 sentences).
     2. Be hilarious, roast playfully, but answer the question directly and contextually.
+
+    Chat History: {chat_history}
+
     User Question: {user_input}
     """,
-    input_variables=["user_input"],
+    input_variables=["user_input", "chat_history"],
     validate_template=True
 )
 
