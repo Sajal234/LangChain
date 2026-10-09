@@ -1,5 +1,6 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.load import loads
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,7 +15,9 @@ chain = template | model
 print("AI chatBot initiated ---- type 'exit' to quit")
 print("="*50)
 
-chat_history = []
+chat_history = [
+    SystemMessage(content='You are a helpful assistant.')
+]
 
 while True:
     user_input = input('You : ')
@@ -24,14 +27,13 @@ while True:
     if not user_input.strip():
         continue
 
+    chat_history.append(HumanMessage(content=user_input))
     response = chain.invoke({"user_input" : user_input, "chat_history" : chat_history})
 
     text = response.content[0]["text"] if isinstance(response.content, list) else response.content
-    chat_history.append("User : " + user_input)
-    chat_history.append("AI : " + text)
+    chat_history.append(AIMessage(content=text))
     print(f"\nAI : {text}\n")
 
-print("\nChat History Summary:")
-for msg in chat_history:
-    print(msg)
+print("\n================================================")
+print('Chat History : \n', chat_history)
 
