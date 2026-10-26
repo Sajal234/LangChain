@@ -1,0 +1,21 @@
+{
+    "title" : "student",
+    "decription" : "schema about students",
+    "type" : "object",
+    "properties" : {
+        "name" : {
+            "type" : "string",
+            "firstName" : {
+                "type" : "string",
+                "description" : "enter the first name of the student"
+            },
+            "lastName" : {
+                "type" : "string",
+                "description" : "enter the last name of the student"
+            }
+        },
+        "age" :  "integer",
+        "email" : "string",
+        "cgpa" : "float"
+    }
+}
